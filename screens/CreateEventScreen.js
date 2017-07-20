@@ -1,12 +1,13 @@
 import React, {Component} from 'React';
-import {View, Text, TextInput, StyleSheet, Switch } from 'react-native';
+import {View, Text, TextInput, StyleSheet, Switch, DatePickerIOS } from 'react-native';
 
 export default class CreateEvent extends Component {
   constructor(){
     super();
     this.state = {
       name: '',
-      date: '',
+      date: new Date(),
+      // timeZoneOffsetInHours: (-1) * (new Date()).getTimezoneOffset() / 60,
       repeatAnnually: false
     }
   }
@@ -20,6 +21,10 @@ export default class CreateEvent extends Component {
   }));
 
 
+  _onDateChange = (date) => this.setState(state => ({
+    date: date
+  }));
+
   render(){
     return(
       <View>
@@ -31,6 +36,14 @@ export default class CreateEvent extends Component {
         <Switch
           onValueChange={this._handleToggleSwitch}
           value={this.state.repeatAnnually}
+        />
+        <Text>
+          {this.state.date.toLocaleDateString()}
+        </Text>
+        <DatePickerIOS
+          date={this.state.date}
+          mode="date"
+          onDateChange={this._onDateChange}
         />
       </View>
     )
