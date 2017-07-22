@@ -1,5 +1,5 @@
 import React, {Component} from 'React';
-import {View, Text, TextInput, StyleSheet, Switch, DatePickerIOS } from 'react-native';
+import {View, Text, TextInput, StyleSheet, Switch, DatePickerIOS, TouchableOpacity } from 'react-native';
 
 export default class CreateEvent extends Component {
   constructor(){
@@ -7,9 +7,10 @@ export default class CreateEvent extends Component {
     this.state = {
       name: '',
       date: new Date(),
-      // timeZoneOffsetInHours: (-1) * (new Date()).getTimezoneOffset() / 60,
-      repeatAnnually: false
+      repeatAnnually: false,
+      showDatePicker: false
     }
+    this.toggleDatePicker = this._toggleDatePicker.bind(this);
   }
 
   static navigationOptions = {
@@ -17,13 +18,33 @@ export default class CreateEvent extends Component {
   }
 
   _handleToggleSwitch = () => this.setState(state => ({
-    repeatAnnually: !state.repeatAnnually
+    repeatAnnually: !this.state.repeatAnnually
   }));
 
 
   _onDateChange = (date) => this.setState(state => ({
     date: date
   }));
+
+  _toggleDatePicker(){
+    this.setState({
+      showDatePicker: !this.state.showDatePicker
+    })
+  }
+
+  _renderDatePicker(){
+    if(this.state.showDatePicker){
+      return (
+          <DatePickerIOS
+            date={this.state.date}
+            mode="date"
+            onDateChange={this._onDateChange}
+          />
+      )
+    } else {
+      return null;
+    }
+  }
 
   render(){
     return(
@@ -37,14 +58,14 @@ export default class CreateEvent extends Component {
           onValueChange={this._handleToggleSwitch}
           value={this.state.repeatAnnually}
         />
-        <Text>
-          {this.state.date.toLocaleDateString()}
-        </Text>
-        <DatePickerIOS
-          date={this.state.date}
-          mode="date"
-          onDateChange={this._onDateChange}
-        />
+        <TouchableOpacity onPress={this.toggleDatePicker}>
+          <Text>
+            {this.state.date.toLocaleDateString()}
+          </Text>
+        </TouchableOpacity>
+        <View>
+          {this._renderDatePicker()}
+        </View>
       </View>
     )
   }

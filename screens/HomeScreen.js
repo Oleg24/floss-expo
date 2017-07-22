@@ -24,10 +24,6 @@ export default class HomeScreen extends React.Component {
     title: 'Hour Glass'
   }
 
-  // _navigateToCreate(){
-  //   navigate()
-  // }
-
   render() {
     const { navigate } = this.props.navigation;
     return (
