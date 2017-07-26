@@ -1,5 +1,15 @@
 import React, {Component} from 'React';
-import {View, Text, TextInput, StyleSheet, Switch, DatePickerIOS, TouchableOpacity } from 'react-native';
+import {
+  View,
+  Text,
+  TextInput,
+  StyleSheet,
+  Switch,
+  Image,
+  DatePickerIOS,
+  TouchableOpacity
+} from 'react-native';
+import { ImagePicker } from 'expo';
 
 export default class CreateEvent extends Component {
   constructor(){
@@ -8,9 +18,11 @@ export default class CreateEvent extends Component {
       name: '',
       date: new Date(),
       repeatAnnually: false,
-      showDatePicker: false
-    }
+      showDatePicker: false,
+      wallPaperSource: null
+    };
     this.toggleDatePicker = this._toggleDatePicker.bind(this);
+    this.toggleSelectWallPaper = this._toggleSelectWallPaper.bind(this);
   }
 
   static navigationOptions = {
@@ -32,6 +44,27 @@ export default class CreateEvent extends Component {
     })
   }
 
+  _toggleSelectWallPaper = async() => {
+    let result;
+    try {
+      result = await ImagePicker.launchImageLibraryAsync({
+        allowEditing: true,
+        aspect: [4, 3]
+      });
+    } catch (e) {
+        result = null;
+    }
+
+    console.log('result', result);
+
+    if(!result.cancelled){
+      this.setState({
+        wallPaperSource: result.uri
+      });
+    }
+
+  }
+
   _renderDatePicker(){
     if(this.state.showDatePicker){
       return (
@@ -47,6 +80,7 @@ export default class CreateEvent extends Component {
   }
 
   render(){
+    let { wallPaperSource } = this.state
     return(
       <View>
         <TextInput
@@ -66,7 +100,15 @@ export default class CreateEvent extends Component {
         <View>
           {this._renderDatePicker()}
         </View>
-      </View>
+        <TouchableOpacity onPress={this.toggleSelectWallPaper}>
+          <View>
+          { this.state.wallPaperSource === null ? <Text>Select a Wallpaper</Text> :
+            <Image source={{ uri: wallPaperSource }} style={{ width: 200, height: 200 }} />
+          }
+          </View>
+        </TouchableOpacity>
+
+    </View>
     )
   }
 }
@@ -75,5 +117,9 @@ const styles = StyleSheet.create({
   input: {
     height: 40,
     backgroundColor: 'salmon'
+  },
+  wallPaperImage: {
+    width: 200,
+    height: 200
   }
 });
