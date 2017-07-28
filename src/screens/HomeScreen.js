@@ -17,11 +17,18 @@ export default class HomeScreen extends React.Component {
         name: 'visit dublin office',
         countdown: 52
       }]
-    }
+    };
+    this.addEventCallback = this._addEvent.bind(this);
   }
 
   static navigationOptions = {
     title: 'Hour Glass'
+  }
+
+  _addEvent(event){
+    this.setState({
+      events: this.state.events.push(event)
+    });
   }
 
   render() {
@@ -29,7 +36,7 @@ export default class HomeScreen extends React.Component {
     return (
       <View style={styles.container}>
         <Button
-          onPress={() => navigate('CreateEvent')}
+          onPress={() => navigate('CreateEvent', { addEventCallback : this.addEventCallback})}
           title="Create"
         />
         <View style={styles.eventContainer}>
