@@ -9,11 +9,12 @@ export default class HomeScreen extends React.Component {
     this.state = {
     };
     this.addEventCallback = this._addEvent.bind(this);
+    
   }
 
-  // static navigationOptions = {
-  //   title: 'Hour Glass'
-  // }
+  static navigationOptions = {
+    title: 'Hour Glass'
+  }
 
   _addEvent(event){
     this.setState({
@@ -22,11 +23,11 @@ export default class HomeScreen extends React.Component {
   }
 
   render() {
-    const { navigate } = this.props.navigation;
+    const { navigation } = this.props;
     return (
       <View style={styles.container}>
         <Button
-          onPress={() => navigate('CreateEvent', { addEventCallback : this.addEventCallback})}
+          onPress={() => navigation.dispatch({type: 'CreateEvent'})}
           title="Create"
         />
         <View style={styles.eventContainer}>

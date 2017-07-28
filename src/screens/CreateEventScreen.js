@@ -25,7 +25,7 @@ export default class CreateEvent extends Component {
     this.toggleSelectWallPaper = this._toggleSelectWallPaper.bind(this);
   }
 
-  static navigationOptions = ({navigation}) => {
+  static navigationOptions = {
     title: 'Create New Event'
   }
 
@@ -54,7 +54,7 @@ export default class CreateEvent extends Component {
     } catch (e) {
         result = null;
     }
- 
+
     if(!result.cancelled){
       this.setState({
         wallPaperSource: result.uri
