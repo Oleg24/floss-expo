@@ -7,23 +7,13 @@ export default class HomeScreen extends React.Component {
   constructor(props){
     super();
     this.state = {
-      events: [{
-        name: 'my birthday',
-        countdown: 12
-      },{
-        name: 'ukraine trip',
-        countdown: 39
-      }, {
-        name: 'visit dublin office',
-        countdown: 52
-      }]
     };
     this.addEventCallback = this._addEvent.bind(this);
   }
 
-  static navigationOptions = {
-    title: 'Hour Glass'
-  }
+  // static navigationOptions = {
+  //   title: 'Hour Glass'
+  // }
 
   _addEvent(event){
     this.setState({
@@ -40,9 +30,10 @@ export default class HomeScreen extends React.Component {
           title="Create"
         />
         <View style={styles.eventContainer}>
-        {this.state.events.map(event =>{
+        {/* {this.state.events.map(event =>{
           return (<Event key={event.name} name={event.name} countdown={event.countdown}/>)
-        })}
+        })} */}
+        <Text>Hi</Text>
         </View>
       </View>
     );

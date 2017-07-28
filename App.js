@@ -1,11 +1,19 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import HomeScreen from './src/screens/HomeScreen';
-import CreateEvent from './src/screens/CreateEventScreen';
-import { StackNavigator } from 'react-navigation';
+import React, {Component} from 'react';
+import { StackNavigator, addNavigationHelpers } from 'react-navigation';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
 
+import AppReducer from './src/reducers';
+import AppWithNavigationState from './src/navigators/AppNavigator';
 
-export default StackNavigator({
-  Home: {screen: HomeScreen},
-  CreateEvent: {screen: CreateEvent}
-});
+export default class App extends Component {
+  store = createStore(AppReducer);
+
+  render(){
+    return (
+      <Provider store={this.store}>
+        <AppWithNavigationState />
+      </Provider>
+    )
+  }
+}
