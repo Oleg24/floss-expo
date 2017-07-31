@@ -10,9 +10,9 @@ export const AppNavigator = StackNavigator({
   CreateEvent: { screen: CreateEvent}
 });
 
-const AppWithNavigationState = ({ dispatch, nav }) => (
-  <AppNavigator navigation={addNavigationHelpers({ dispatch, state: nav})} />
-);
+const AppWithNavigationState = ({ dispatch, nav }) => {
+  return <AppNavigator navigation={addNavigationHelpers({ dispatch, state: nav})} />
+};
 
 const mapStateToProps = state => ({
   nav: state.nav

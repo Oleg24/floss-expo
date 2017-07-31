@@ -2,14 +2,13 @@ import React from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
 import Event from '../components/Event';
 import Header from '../components/Header';
+import {connect } from 'react-redux';
 
-export default class HomeScreen extends React.Component {
+class HomeScreen extends React.Component {
   constructor(props){
     super();
-    this.state = {
-    };
+    this.state = {};
     this.addEventCallback = this._addEvent.bind(this);
-    
   }
 
   static navigationOptions = {
@@ -24,6 +23,10 @@ export default class HomeScreen extends React.Component {
 
   render() {
     const { navigation } = this.props;
+    const { events } = this.props;
+
+    console.log(this.props);
+    console.log('EVENTS',events);
     return (
       <View style={styles.container}>
         <Button
@@ -31,10 +34,9 @@ export default class HomeScreen extends React.Component {
           title="Create"
         />
         <View style={styles.eventContainer}>
-        {/* {this.state.events.map(event =>{
+        {events.map(event =>{
           return (<Event key={event.name} name={event.name} countdown={event.countdown}/>)
-        })} */}
-        <Text>Hi</Text>
+        })}
         </View>
       </View>
     );
@@ -53,3 +55,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   }
 });
+
+const mapStateToProps = state =>{
+  return {
+    events: state.events
+  }
+}
+
+const HomeScreenWithProps = connect(mapStateToProps)(HomeScreen)
+
+
+export default HomeScreenWithProps;

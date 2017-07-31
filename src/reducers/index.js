@@ -10,9 +10,9 @@ const initialNavState = AppNavigator.router.getStateForAction(
   firstAction
 );
 
-function nav(state = initialNavState, action) {
+function navReducer(state = initialNavState, action) {
   let nextState;
-
+  console.log('nav action', action)
   switch (action.type) {
     case 'CreateEvent':
       nextState = AppNavigator.router.getStateForAction(
@@ -35,7 +35,7 @@ function nav(state = initialNavState, action) {
   return nextState || state;
 }
 
-const events = [{
+const defaultEvents = [{
     name: 'my birthday',
     countdown: 12
   },{
@@ -47,22 +47,20 @@ const events = [{
   }];
 
 
-const initialEventState = { events: events};
+const initialEventState =  defaultEvents;
 
-function manageEvent(state = initialEventState, action){
-  console.log('eventAction', action);
+function events(state = initialEventState, action){
   switch(action.type){
     case 'addEvent':
-      return { ...state}
-
+      return { ...state, events};
     default:
       return state;
   }
-
 }
 
 const AppReducer = combineReducers({
-  nav
+  events,
+  nav : navReducer
 });
 
 export default AppReducer;
