@@ -136,6 +136,10 @@ export default class CreateEvent extends Component {
   }
 }
 
+CreateEvent.propTypes = {
+
+}
+
 const styles = StyleSheet.create({
   input: {
     height: 40,

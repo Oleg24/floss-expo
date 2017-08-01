@@ -7,17 +7,10 @@ import PropTypes from 'prop-types';
 export default class HomeScreen extends React.Component {
   constructor(props){
     super();
-    this.addEventCallback = this._addEvent.bind(this);
   }
 
   static navigationOptions = {
     title: 'Hour Glass'
-  }
-
-  _addEvent(event){
-    this.setState({
-      events: this.state.events.push(event)
-    });
   }
 
   render() {
@@ -26,10 +19,6 @@ export default class HomeScreen extends React.Component {
 
     return (
       <View style={styles.container}>
-        <Button
-          onPress={() => navigation.dispatch({type: 'CreateEvent'})}
-          title="Create An Event"
-        />
         <View style={styles.eventContainer}>
         {events.map(event =>{
           return (<Event key={event.name}
@@ -39,6 +28,10 @@ export default class HomeScreen extends React.Component {
           />)
         })}
         </View>
+        <Button
+          onPress={() => navigation.dispatch({type: 'CreateEvent'})}
+          title="Create An Event"
+        />
       </View>
     );
   }
@@ -58,12 +51,14 @@ HomeScreen.propTypes = {
 const styles = StyleSheet.create({
   container: {
     display: 'flex',
-    flexDirection: 'column',
-    backgroundColor: '#fff'
+    flexDirection: 'column'
   },
   eventContainer: {
     display: 'flex',
+    flexGrow: 1,
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    alignContent: 'stretch',
+    height: '90%'
   }
 });

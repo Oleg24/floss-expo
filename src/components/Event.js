@@ -8,7 +8,6 @@ export default class Event extends Component {
   }
 
   render(){
-    console.log(this.props)
     return (
       <View style={styles.container}>
         <Text style={styles.name}>{this.props.name}</Text>
@@ -20,12 +19,17 @@ export default class Event extends Component {
   }
 }
 
+Event.propTypes = {
+
+}
+
 const styles = StyleSheet.create({
   container: {
     display: 'flex',
     width: '100%',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    flexGrow: 1
   },
   name: {
     fontSize: 40
