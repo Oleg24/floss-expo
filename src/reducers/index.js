@@ -12,7 +12,6 @@ const initialNavState = AppNavigator.router.getStateForAction(
 
 function navReducer(state = initialNavState, action) {
   let nextState;
-  console.log('nav action', action)
   switch (action.type) {
     case 'CreateEvent':
       nextState = AppNavigator.router.getStateForAction(
@@ -31,36 +30,49 @@ function navReducer(state = initialNavState, action) {
       break;
   }
 
-  // Simply return the original `state` if `nextState` is null or undefined.
   return nextState || state;
 }
 
 const defaultEvents = [{
     name: 'my birthday',
-    countdown: 12
+    countdown: 12,
+    repeatAnnually: false,
+    wallPaperSource: null
   },{
     name: 'ukraine trip',
-    countdown: 39
+    countdown: 39,
+    repeatAnnually: false,
+    wallPaperSource: null
   }, {
     name: 'visit dublin office',
-    countdown: 52
+    countdown: 52,
+    repeatAnnually: false,
+    wallPaperSource: null
   }];
 
 
 const initialEventState =  defaultEvents;
 
 function events(state = initialEventState, action){
+  console.log('action', action)
+  console.log('state', state)
   switch(action.type){
-    case 'addEvent':
-      return { ...state, events};
+    case 'ADD_EVENT':
+      return [ ...state,
+        {
+          name: action.name,
+          countdown: 1234,
+          repeatAnnually: action.repeatAnnually,
+          wallPaperSource: action.wallPaperSource || null
+        }];
     default:
       return state;
   }
 }
 
 const AppReducer = combineReducers({
-  events,
-  nav : navReducer
+  nav : navReducer,
+  events
 });
 
 export default AppReducer;

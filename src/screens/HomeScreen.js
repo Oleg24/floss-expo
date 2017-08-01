@@ -2,12 +2,11 @@ import React from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
 import Event from '../components/Event';
 import Header from '../components/Header';
-import {connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
-class HomeScreen extends React.Component {
+export default class HomeScreen extends React.Component {
   constructor(props){
     super();
-    this.state = {};
     this.addEventCallback = this._addEvent.bind(this);
   }
 
@@ -25,8 +24,6 @@ class HomeScreen extends React.Component {
     const { navigation } = this.props;
     const { events } = this.props;
 
-    console.log(this.props);
-    console.log('EVENTS',events);
     return (
       <View style={styles.container}>
         <Button
@@ -43,6 +40,17 @@ class HomeScreen extends React.Component {
   }
 }
 
+HomeScreen.propTypes = {
+  events: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      // countdown: PropTypes.number.isRequired,
+      repeatAnnually: PropTypes.bool.isRequired,
+      wallPaperSource: PropTypes.string
+    }).isRequired
+  ).isRequired
+}
+
 const styles = StyleSheet.create({
   container: {
     display: 'flex',
@@ -55,14 +63,3 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   }
 });
-
-const mapStateToProps = state =>{
-  return {
-    events: state.events
-  }
-}
-
-const HomeScreenWithProps = connect(mapStateToProps)(HomeScreen)
-
-
-export default HomeScreenWithProps;

@@ -3,6 +3,7 @@ import {
   View,
   Text,
   TextInput,
+  Button,
   StyleSheet,
   Switch,
   Image,
@@ -78,7 +79,8 @@ export default class CreateEvent extends Component {
   }
 
   render(){
-    let { wallPaperSource } = this.state
+    const { onClick } = this.props
+    let { wallPaperSource } = this.state;
     return(
       <View>
         <TextInput
@@ -105,7 +107,16 @@ export default class CreateEvent extends Component {
           }
           </View>
         </TouchableOpacity>
+        <TouchableOpacity>
+          <Button
+            onPress={e => {
+              e.preventDefault()
+              onClick(this.state)
+            }}
+            title="Create Event"
+          />
 
+        </TouchableOpacity>
     </View>
     )
   }
