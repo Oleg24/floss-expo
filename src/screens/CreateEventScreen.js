@@ -129,8 +129,6 @@ export default class CreateEvent extends Component {
           color="#1e90ff"
           title="Create Event"
         />
-
-
     </View>
     )
   }

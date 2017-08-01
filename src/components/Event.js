@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {StyleSheet, Text, View, Image } from 'react-native';
+import {getRemainingDays} from '../utility/date';
 
 export default class Event extends Component {
   constructor(props){
@@ -8,10 +9,11 @@ export default class Event extends Component {
   }
 
   render(){
+    const date = this.props.countdown;
     return (
       <View style={styles.container}>
         <Text style={styles.name}>{this.props.name}</Text>
-        <Text style={styles.countdown}>{this.props.countdown}</Text>
+        <Text style={styles.countdown}>{getRemainingDays(date)} Days</Text>
         {this.props.wallPaperSource ?
           <Image source={{ uri: this.props.wallPaperSource}} style={styles.backgroundImage}/> : null }
       </View>
