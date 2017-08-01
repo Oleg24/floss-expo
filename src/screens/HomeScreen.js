@@ -28,11 +28,15 @@ export default class HomeScreen extends React.Component {
       <View style={styles.container}>
         <Button
           onPress={() => navigation.dispatch({type: 'CreateEvent'})}
-          title="Create"
+          title="Create An Event"
         />
         <View style={styles.eventContainer}>
         {events.map(event =>{
-          return (<Event key={event.name} name={event.name} countdown={event.countdown}/>)
+          return (<Event key={event.name}
+            name={event.name}
+            countdown={event.countdown}
+            wallPaperSource={event.wallPaperSource}
+          />)
         })}
         </View>
       </View>

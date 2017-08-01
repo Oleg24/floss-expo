@@ -19,6 +19,7 @@ function navReducer(state = initialNavState, action) {
         state
       );
       break;
+    case 'ADD_EVENT':
     case 'Home':
       nextState = AppNavigator.router.getStateForAction(
         NavigationActions.back(),
@@ -54,8 +55,6 @@ const defaultEvents = [{
 const initialEventState =  defaultEvents;
 
 function events(state = initialEventState, action){
-  console.log('action', action)
-  console.log('state', state)
   switch(action.type){
     case 'ADD_EVENT':
       return [ ...state,

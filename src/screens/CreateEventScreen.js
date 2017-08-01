@@ -88,35 +88,49 @@ export default class CreateEvent extends Component {
           placeholder="Event Name"
           onChangeText={(name) => this.setState({name})}
         />
-        <Switch
-          onValueChange={this._handleToggleSwitch}
-          value={this.state.repeatAnnually}
-        />
-        <TouchableOpacity onPress={this.toggleDatePicker}>
-          <Text>
-            {this.state.date.toLocaleDateString()}
-          </Text>
-        </TouchableOpacity>
-        <View>
-          {this._renderDatePicker()}
-        </View>
-        <TouchableOpacity onPress={this.toggleSelectWallPaper}>
-          <View>
-          { this.state.wallPaperSource === null ? <Text>Select a Wallpaper</Text> :
-            <Image source={{ uri: wallPaperSource }} style={{ width: 200, height: 200 }} />
-          }
+        <View style={styles.eventDetailsContainer}>
+          <View style={styles.itemContainer}>
+            <Text>Repeat Annually</Text>
+            <Switch
+              onValueChange={this._handleToggleSwitch}
+              value={this.state.repeatAnnually}
+            />
           </View>
-        </TouchableOpacity>
-        <TouchableOpacity>
-          <Button
-            onPress={e => {
-              e.preventDefault()
-              onClick(this.state)
-            }}
-            title="Create Event"
-          />
+          <TouchableOpacity onPress={this.toggleDatePicker}>
+            <View style={styles.itemContainer}>
+              <Text>Select Date</Text>
+              <Text>{this.state.date.toLocaleDateString()}</Text>
+            </View>
+          </TouchableOpacity>
+          <View>
+            {this._renderDatePicker()}
+          </View>
+        </View>
+        <View style={styles.eventDetailsContainer}>
+          <TouchableOpacity onPress={this.toggleSelectWallPaper}>
+            <View style={styles.itemContainer}>
+              <Text>Wallpaper</Text>
+              { this.state.wallPaperSource  ?
+                <Image source={{ uri: wallPaperSource }} style={{ width: 100, height: 100 }}/>
+                 : null
+              }
+            </View>
+          </TouchableOpacity>
+        </View>
+        <Button
+          style={styles.submitBtn}
+          onPress={e => {
+            e.preventDefault()
+            if(!this.state.name.trim()){
+              return
+            }
+            onClick(this.state)
+          }}
+          color="#1e90ff"
+          title="Create Event"
+        />
 
-        </TouchableOpacity>
+
     </View>
     )
   }
@@ -125,7 +139,23 @@ export default class CreateEvent extends Component {
 const styles = StyleSheet.create({
   input: {
     height: 40,
-    backgroundColor: 'salmon'
+    padding: 10,
+    textAlign: 'center',
+    backgroundColor: 'white'
+  },
+  eventDetailsContainer: {
+    marginTop: 20,
+    backgroundColor: 'white',
+    padding: 20,
+    paddingTop: 10,
+    paddingBottom: 10
+  },
+  itemContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    margin: 10
   },
   wallPaperImage: {
     width: 200,
