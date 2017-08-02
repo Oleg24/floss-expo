@@ -36,17 +36,17 @@ function navReducer(state = initialNavState, action) {
 
 const defaultEvents = [{
     name: 'my birthday',
-    countdown: new Date(),
+    date: new Date(),
     repeatAnnually: false,
     wallPaperSource: null
   },{
     name: 'ukraine trip',
-    countdown: new Date(),
+    date: new Date(),
     repeatAnnually: false,
     wallPaperSource: null
   }, {
     name: 'visit dublin office',
-    countdown: new Date(),
+    date: new Date(),
     repeatAnnually: false,
     wallPaperSource: null
   }];
@@ -60,7 +60,7 @@ function events(state = initialEventState, action){
       return [ ...state,
         {
           name: action.name,
-          countdown: action.date,
+          date: action.date,
           repeatAnnually: action.repeatAnnually,
           wallPaperSource: action.wallPaperSource || null
         }];

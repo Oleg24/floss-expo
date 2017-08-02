@@ -23,7 +23,7 @@ export default class HomeScreen extends React.Component {
         {events.map(event =>{
           return (<Event key={event.name}
             name={event.name}
-            countdown={event.countdown}
+            date={event.date}
             wallPaperSource={event.wallPaperSource}
           />)
         })}
