@@ -4,3 +4,11 @@ export const addEvent = event => {
     ...event
   }
 }
+
+export const viewEvent = (event, events) => {
+  return {
+    type: 'VIEW_EVENT',
+    name: event.name,
+    events: events
+  }
+}

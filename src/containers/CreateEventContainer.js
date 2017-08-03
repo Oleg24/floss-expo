@@ -1,15 +1,15 @@
 import { connect } from 'react-redux';
-import CreateEvent from '../screens/CreateEventScreen';
+import CreateEventView from '../screens/CreateEventScreen';
 import { addEvent } from '../actions';
 
-const mapDispatchToProps = (dispatch, state, something) => {
+const mapDispatchToProps = (dispatch, state) => {
   return {
-    onClick: (input) => {
-      dispatch(addEvent(input))
+    onClick: (newEventData) => {
+      dispatch(addEvent(newEventData))
     }
   }
 }
 
-const CreateEventContainer = connect(null,mapDispatchToProps)(CreateEvent);
+const CreateEventContainer = connect(null,mapDispatchToProps)(CreateEventView);
 
 export default CreateEventContainer;

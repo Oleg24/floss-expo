@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import { NavigationActions } from 'react-navigation';
-
 import { AppNavigator } from '../navigators/AppNavigator';
+import { find } from 'lodash';
 
 const firstAction = AppNavigator.router.getActionForPathAndParams('Home');
 const tempNavState = AppNavigator.router.getStateForAction(firstAction);
@@ -13,12 +13,18 @@ const initialNavState = AppNavigator.router.getStateForAction(
 function navReducer(state = initialNavState, action) {
   let nextState;
   switch (action.type) {
-    case 'CreateEvent':
+    case 'CREATE_EVENT':
       nextState = AppNavigator.router.getStateForAction(
         NavigationActions.navigate({ routeName: 'CreateEvent'}),
         state
       );
       break;
+    case 'VIEW_EVENT':
+      nextState = AppNavigator.router.getStateForAction(
+        NavigationActions.navigate({ routeName: 'ViewEvent'}),
+        state
+      )
+      break
     case 'ADD_EVENT':
     case 'Home':
       nextState = AppNavigator.router.getStateForAction(
@@ -30,7 +36,6 @@ function navReducer(state = initialNavState, action) {
       nextState = AppNavigator.router.getStateForAction(action, state);
       break;
   }
-
   return nextState || state;
 }
 
@@ -69,9 +74,26 @@ function events(state = initialEventState, action){
   }
 }
 
+function viewEvent(state = initialEventState, action){
+  console.log('viewEvent', action)
+  switch(action.type){
+    case 'VIEW_EVENT':
+        const event = find(action.events, event =>(
+          event.name = action.name
+        ))
+        console.log('FOUND EVENT', event)
+        return event
+    default:
+      return state;
+  }
+}
+
+
+
 const AppReducer = combineReducers({
   nav : navReducer,
-  events
+  events,
+  viewEvent
 });
 
 export default AppReducer;

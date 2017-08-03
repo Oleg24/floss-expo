@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
-import Event from '../components/Event';
+import Event from '../containers/EventContainer';
 import Header from '../components/Header';
 import PropTypes from 'prop-types';
 
@@ -29,8 +29,8 @@ export default class HomeScreen extends React.Component {
         })}
         </View>
         <Button
-          onPress={() => navigation.dispatch({type: 'CreateEvent'})}
-          title="Create An Event"
+          onPress={() => navigation.dispatch({type: 'CREATE_EVENT'})}
+          title="Add Event"
         />
       </View>
     );
