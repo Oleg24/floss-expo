@@ -23,7 +23,6 @@ export default class CreateEvent extends Component {
       showDatePicker: false,
       wallPaperSource: null
     };
-    this.toggleDatePicker = this._toggleDatePicker.bind(this);
     this.toggleSelectWallPaper = this._toggleSelectWallPaper.bind(this);
   }
 
@@ -40,11 +39,11 @@ export default class CreateEvent extends Component {
     date: date
   }));
 
-  _toggleDatePicker(){
-    this.setState({
-      showDatePicker: !this.state.showDatePicker
-    })
-  }
+  // _toggleDatePicker(){
+  //   this.setState({
+  //     showDatePicker: !this.state.showDatePicker
+  //   })
+  // }
 
   _toggleSelectWallPaper = async() => {
     let result;
@@ -66,7 +65,7 @@ export default class CreateEvent extends Component {
   }
 
   _renderDatePicker(){
-    if(this.state.showDatePicker){
+    if(this.props.showDatePicker){
       return (
           <DatePickerIOS
             date={this.state.date}
@@ -80,7 +79,7 @@ export default class CreateEvent extends Component {
   }
 
   render(){
-    const { onClick } = this.props
+    const { onClick, toggleDatePicker, showDatePicker } = this.props
     let { wallPaperSource } = this.state;
     return(
       <View>
@@ -97,7 +96,10 @@ export default class CreateEvent extends Component {
               value={this.state.repeatAnnually}
             />
           </View>
-          <TouchableOpacity onPress={this.toggleDatePicker}>
+          <TouchableOpacity onPress={e => {
+            e.preventDefault()
+            toggleDatePicker(showDatePicker)
+          }}>
             <View style={styles.itemContainer}>
               <Text>Select Date</Text>
               <Text>{this.state.date.toLocaleDateString()}</Text>

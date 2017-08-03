@@ -1,6 +1,28 @@
 import React, {Component} from 'React';
-import {DatePickerIOS} from 'react-native';
+import {DatePickerIOS, View} from 'react-native';
 
-export default class DatePicker extends Component {
-  
+const DatePicker = ({showDatePicker, onDateChange, date }) {
+
+  _renderDatePicker(){
+    if(this.state.showDatePicker){
+      return (
+          <DatePickerIOS
+            date={date}
+            mode="date"
+            onDateChange={onDateChange}
+          />
+      )
+    } else {
+      return null;
+    }
+  }
+
+  render(){
+    return(
+      <View>
+        {this._renderDatePicker()}
+      </View>
+    )
+  }
+
 }

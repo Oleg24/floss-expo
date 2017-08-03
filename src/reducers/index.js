@@ -86,10 +86,34 @@ function viewEvent(state = initialEventState, action){
   }
 }
 
+function showDatePicker(state = false, action){
+  switch(action.type){
+    case 'TOGGLE_DATE_PICKER':
+      return !action.showDatePicker
+    default:
+      return state
+  }
+}
+
+const defaultEvent = {
+  name: '',
+  date: new Date(),
+  repeatAnnually: false,
+  showDatePicker: false,
+  wallPaperSource: null
+}
+
+
+function eventBeingCreated(){
+
+}
+
+
 const AppReducer = combineReducers({
   nav : navReducer,
   events,
-  viewEvent
+  viewEvent,
+  showDatePicker
 });
 
 export default AppReducer;

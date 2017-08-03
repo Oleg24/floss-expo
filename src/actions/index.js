@@ -12,3 +12,17 @@ export const viewEvent = (event, events) => {
     events: events
   }
 }
+
+export const toggleDatePicker = showDatePicker =>{
+  return {
+    type: 'TOGGLE_DATE_PICKER',
+    showDatePicker: showDatePicker
+  }
+}
+
+export const updateDate = (date) =>{
+  return {
+    type: 'UPDATE_DATE',
+    date: date
+  }
+}
