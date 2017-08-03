@@ -11,6 +11,7 @@ import {
   TouchableOpacity
 } from 'react-native';
 import { ImagePicker } from 'expo';
+import PropTypes from 'prop-types';
 
 export default class CreateEvent extends Component {
   constructor(){
@@ -135,7 +136,7 @@ export default class CreateEvent extends Component {
 }
 
 CreateEvent.propTypes = {
-
+  onClick: PropTypes.func.isRequired
 }
 
 const styles = StyleSheet.create({

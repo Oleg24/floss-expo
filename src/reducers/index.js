@@ -75,20 +75,16 @@ function events(state = initialEventState, action){
 }
 
 function viewEvent(state = initialEventState, action){
-  console.log('viewEvent', action)
   switch(action.type){
     case 'VIEW_EVENT':
         const event = find(action.events, event =>(
           event.name = action.name
-        ))
-        console.log('FOUND EVENT', event)
+        ));
         return event
     default:
       return state;
   }
 }
-
-
 
 const AppReducer = combineReducers({
   nav : navReducer,

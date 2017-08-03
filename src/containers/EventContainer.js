@@ -1,5 +1,5 @@
 import { connect} from 'react-redux';
-import Event from '../components/Event';
+import TouchableEvent from '../components/TouchableEvent';
 import {viewEvent} from '../actions';
 
 const mapStateToProps = (state, ownProps) => {
@@ -20,6 +20,6 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 const CreateEventContainer = connect(
   mapStateToProps,
   mapDispatchToProps
-)(Event);
+)(TouchableEvent);
 
 export default CreateEventContainer;

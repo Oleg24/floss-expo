@@ -1,14 +1,10 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
 import Event from '../containers/EventContainer';
-import Header from '../components/Header';
 import PropTypes from 'prop-types';
 
 export default class HomeScreen extends React.Component {
-  constructor(props){
-    super();
-  }
-
+  
   static navigationOptions = {
     title: 'Hour Glass'
   }
@@ -41,7 +37,7 @@ HomeScreen.propTypes = {
   events: PropTypes.arrayOf(
     PropTypes.shape({
       name: PropTypes.string.isRequired,
-      // countdown: PropTypes.number.isRequired,
+      date: PropTypes.instanceOf(Date).isRequired,
       repeatAnnually: PropTypes.bool.isRequired,
       wallPaperSource: PropTypes.string
     }).isRequired
