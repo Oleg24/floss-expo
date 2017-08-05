@@ -20,9 +20,10 @@ export const toggleDatePicker = showDatePicker =>{
   }
 }
 
-export const updateDate = (date) =>{
+export const updateDate = (date, event) =>{
   return {
     type: 'UPDATE_DATE',
-    date: date
+    date: date,
+    event: event
   }
 }

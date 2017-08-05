@@ -104,8 +104,11 @@ const defaultEvent = {
 }
 
 
-function eventBeingCreated(){
-
+function eventBeingCreated(state = defaultEvent, action){
+  switch(action.type){
+    case 'UPDATE_DATE':
+      return Object.assign(action.event, action.date)
+  }
 }
 
 

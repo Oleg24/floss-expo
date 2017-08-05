@@ -3,17 +3,24 @@ import DatePicker from '../components/DatePicker';
 import { updateDate } from '../actions';
 
 const mapStateToProps =  (state, ownProps) => {
+  const { eventBeingCreated, showDatePicker} = state
   return {
-    event: state.event
+    event: eventBeingCreated,
+    showDatePicker
   }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) =>{
   return {
-    onDateChange: (newDate)=>{
-      dispatch(updateDate(newDate))
+    onDateChange: (newDate, event)=>{
+      dispatch(updateDate(newDate, event))
     }
   }
 }
 
-const mapDispatchToProps
+const DatePickerContainer = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(DatePicker);
+
+export default DatePickerContainer;
