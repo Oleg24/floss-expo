@@ -1,15 +1,23 @@
 import React, {Component} from 'React';
 import {DatePickerIOS, View} from 'react-native';
 
-const DatePicker = ({showDatePicker, onDateChange, date, event }) {
+export default class DatePicker extends Component {
+
+
+  _onDateChange = (date) => {
+    this.props.onDateChange(date, this.props.eventBeingCreated);
+  }
+
 
   _renderDatePicker(){
-    if(this.state.showDatePicker){
+    const {showDatePicker, onDateChange, eventBeingCreated } = this.props;
+    console.log('funct',onDateChange)
+    if(showDatePicker){
       return (
           <DatePickerIOS
-            date={date}
+            date={eventBeingCreated.date}
             mode="date"
-            onDateChange={onDateChange(date, event)}
+            onDateChange={this._onDateChange}
           />
       )
     } else {

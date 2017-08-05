@@ -107,7 +107,11 @@ const defaultEvent = {
 function eventBeingCreated(state = defaultEvent, action){
   switch(action.type){
     case 'UPDATE_DATE':
-      return Object.assign(action.event, action.date)
+      return Object.assign({}, state, {date: action.date})
+    case 'UPDATE_EVENT':
+      return Object.assign({}, state, action.event)
+    default:
+      return state
   }
 }
 
@@ -116,6 +120,7 @@ const AppReducer = combineReducers({
   nav : navReducer,
   events,
   viewEvent,
+  eventBeingCreated,
   showDatePicker
 });
 

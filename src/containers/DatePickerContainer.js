@@ -5,8 +5,9 @@ import { updateDate } from '../actions';
 const mapStateToProps =  (state, ownProps) => {
   const { eventBeingCreated, showDatePicker} = state
   return {
-    event: eventBeingCreated,
-    showDatePicker
+    showDatePicker,
+    eventBeingCreated,
+    ownProps
   }
 }
 
