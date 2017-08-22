@@ -46,7 +46,7 @@ const defaultEvents = [{
     wallPaperSource: null
   },{
     name: 'ukraine trip',
-    date: new Date(),
+date: new Date(),
     repeatAnnually: false,
     wallPaperSource: null
   }, {
@@ -104,12 +104,15 @@ const defaultEvent = {
 }
 
 
-function eventBeingCreated(state = defaultEvent, action){
+function newEvent(state = defaultEvent, action){
   switch(action.type){
     case 'UPDATE_DATE':
       return Object.assign({}, state, {date: action.date})
     case 'UPDATE_EVENT':
-      return Object.assign({}, state, action.event)
+      return Object.assign({}, state, action.event);
+    case 'HOME':
+    case 'ADD_EVENT':
+      return defaultEvent;
     default:
       return state
   }
@@ -117,10 +120,10 @@ function eventBeingCreated(state = defaultEvent, action){
 
 
 const AppReducer = combineReducers({
+  newEvent,
   nav : navReducer,
   events,
   viewEvent,
-  eventBeingCreated,
   showDatePicker
 });
 

@@ -34,16 +34,9 @@ export default class CreateEvent extends Component {
     repeatAnnually: !this.state.repeatAnnually
   }));
 
-
   _onDateChange = (date) => this.setState(state => ({
     date: date
   }));
-
-  // _toggleDatePicker(){
-  //   this.setState({
-  //     showDatePicker: !this.state.showDatePicker
-  //   })
-  // }
 
   _toggleSelectWallPaper = async() => {
     let result;
@@ -57,20 +50,17 @@ export default class CreateEvent extends Component {
     }
 
     if(!result.cancelled){
-      this.setState({
-        wallPaperSource: result.uri
-      });
+      this.props.handleUpdateEvent({['wallPaperSource']: result.uri})
     }
-
   }
 
   _renderDatePicker(){
     if(this.props.showDatePicker){
       return (
           <DatePickerIOS
-            date={this.state.date}
+            date={this.props.newEvent.date}
             mode="date"
-            onDateChange={this._onDateChange}
+            onDateChange={(date) => this.props.handleUpdateEvent({['date']: date})}
           />
       )
     } else {
@@ -79,21 +69,21 @@ export default class CreateEvent extends Component {
   }
 
   render(){
-    const { onClick, toggleDatePicker, showDatePicker } = this.props
-    let { wallPaperSource } = this.state;
+    const { newEvent, onClick, toggleDatePicker, showDatePicker, handleUpdateEvent } = this.props;
     return(
       <View>
         <TextInput
           style={styles.input}
           placeholder="Event Name"
-          onChangeText={(name) => this.setState({name})}
+          value={newEvent.name}
+          onChangeText={(value) => handleUpdateEvent({['name']: value})}
         />
         <View style={styles.eventDetailsContainer}>
           <View style={styles.itemContainer}>
             <Text>Repeat Annually</Text>
             <Switch
-              onValueChange={this._handleToggleSwitch}
-              value={this.state.repeatAnnually}
+              onValueChange={() => handleUpdateEvent({'repeatAnnually': !newEvent.repeatAnnually})}
+              value={newEvent.repeatAnnually}
             />
           </View>
           <TouchableOpacity onPress={e => {
@@ -102,7 +92,7 @@ export default class CreateEvent extends Component {
           }}>
             <View style={styles.itemContainer}>
               <Text>Select Date</Text>
-              <Text>{this.state.date.toLocaleDateString()}</Text>
+              <Text>{newEvent.date.toLocaleDateString()}</Text>
             </View>
           </TouchableOpacity>
           <View>
@@ -113,8 +103,8 @@ export default class CreateEvent extends Component {
           <TouchableOpacity onPress={this.toggleSelectWallPaper}>
             <View style={styles.itemContainer}>
               <Text>Wallpaper</Text>
-              { this.state.wallPaperSource  ?
-                <Image source={{ uri: wallPaperSource }} style={{ width: 100, height: 100 }}/>
+              { newEvent.wallPaperSource  ?
+                <Image source={{ uri: newEvent.wallPaperSource }} style={{ width: 100, height: 100 }}/>
                  : null
               }
             </View>
@@ -124,10 +114,10 @@ export default class CreateEvent extends Component {
           style={styles.submitBtn}
           onPress={e => {
             e.preventDefault()
-            if(!this.state.name.trim()){
+            if(!newEvent.name.trim()){
               return
             }
-            onClick(this.state)
+            onClick(newEvent)
           }}
           color="#1e90ff"
           title="Create Event"
