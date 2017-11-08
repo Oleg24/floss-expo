@@ -1,4 +1,4 @@
-import { ADD_EVENT, VIEW_EVENT, UPDATE_EVENT } from './ActionTypes'; 
+import { ADD_EVENT, VIEW_EVENT, UPDATE_EVENT } from './ActionTypes';
 
 export const addEvent = event => {
   return {
@@ -14,10 +14,9 @@ export const viewEvent = (event) => {
   }
 }
 
-export const toggleDatePicker = showDatePicker =>{
+export const toggleDatePicker = () =>{
   return {
-    type: 'TOGGLE_DATE_PICKER',
-    showDatePicker: showDatePicker
+    type: 'TOGGLE_DATE_PICKER'
   }
 }
 

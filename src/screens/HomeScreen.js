@@ -13,7 +13,6 @@ export default class HomeScreen extends React.Component {
     const { navigation, events } = this.props;
     return (
       <View style={styles.container}>
-        {/* <Text>{JSON.stringify(events, null, 4)}</Text> */}
         <View style={styles.eventContainer}>
           {events.map(event =>
             <Event key={event.name}

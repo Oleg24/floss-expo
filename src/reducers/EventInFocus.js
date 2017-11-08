@@ -1,4 +1,4 @@
-import { VIEW_EVENT} from '../actions/ActionTypes';
+import { HOME, VIEW_EVENT} from '../actions/ActionTypes';
 
 function eventInFocus(state = {}, action){
   switch(action.type){

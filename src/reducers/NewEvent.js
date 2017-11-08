@@ -10,7 +10,8 @@ const defaultEvent = {
 
 function newEvent(state = defaultEvent, action){
   switch(action.type){
-      // return Object.assign({}, state, {date: action.date})
+    case 'TOGGLE_DATE_PICKER':
+    return Object.assign({}, state, { showDatePicker: !state.showDatePicker});
     case 'UPDATE_DATE':
     case UPDATE_EVENT:
       return Object.assign({}, state, action.event);
@@ -18,7 +19,7 @@ function newEvent(state = defaultEvent, action){
     case ADD_EVENT:
       return defaultEvent;
     default:
-      return state
+      return Object.assign({}, defaultEvent);
   }
 }
 
