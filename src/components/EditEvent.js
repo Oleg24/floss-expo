@@ -19,6 +19,7 @@ const EditEvent = ({
   handleUpdateEvent,
   toggleDatePicker
 }) => {
+
   _renderDatePicker = () => {
     if(event.showDatePicker){
       return (
@@ -30,6 +31,22 @@ const EditEvent = ({
       )
     } else {
       return null;
+    }
+  }
+
+  _toggleSelectWallPaper = async() => {
+    let result;
+    try {
+      result = await ImagePicker.launchImageLibraryAsync({
+        allowEditing: true,
+        aspect: [4, 3]
+      });
+    } catch (e) {
+        result = null;
+    }
+
+    if(!result.cancelled){
+      handleUpdateEvent({['wallPaperSource']: result.uri})
     }
   }
 
@@ -60,6 +77,18 @@ const EditEvent = ({
         </TouchableOpacity>
         <View>
           {_renderDatePicker()}
+        </View>
+        <View style={styles.eventDetailsContainer}>
+          <TouchableOpacity onPress={_toggleSelectWallPaper}>
+            <View style={styles.itemContainer}>
+              <Text>Wallpaper</Text>
+              { event.wallPaperSource  ?
+                <Image source={{ uri: event.wallPaperSource }}
+                  style={{ width: 100, height: 100 }}/>
+                 : null
+              }
+            </View>
+          </TouchableOpacity>
         </View>
         <Button
           style={styles.submitBtn}
