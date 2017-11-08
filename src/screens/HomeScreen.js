@@ -4,25 +4,24 @@ import Event from '../containers/EventContainer';
 import PropTypes from 'prop-types';
 
 export default class HomeScreen extends React.Component {
-  
+
   static navigationOptions = {
     title: 'Hour Glass'
   }
 
   render() {
-    const { navigation } = this.props;
-    const { events } = this.props;
-
+    const { navigation, events } = this.props;
     return (
       <View style={styles.container}>
+        {/* <Text>{JSON.stringify(events, null, 4)}</Text> */}
         <View style={styles.eventContainer}>
-        {events.map(event =>{
-          return (<Event key={event.name}
-            name={event.name}
-            date={event.date}
-            wallPaperSource={event.wallPaperSource}
-          />)
-        })}
+          {events.map(event =>
+            <Event key={event.name}
+              name={event.name}
+              date={event.date}
+              wallPaperSource={event.wallPaperSource}
+            />
+          )}
         </View>
         <Button
           onPress={() => navigation.dispatch({type: 'CREATE_EVENT'})}

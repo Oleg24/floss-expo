@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, Image } from 'react-native';
 import Event from '../components/Event';
 import PropTypes from 'prop-types';
 
-const EventView = ({ viewEvent}) => {
+const EventView = ({ viewEvent }) => {
     const { date, name, wallPaperSource } = viewEvent;
     return (
       <Event

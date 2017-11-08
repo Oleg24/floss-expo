@@ -1,15 +1,16 @@
+import { ADD_EVENT, VIEW_EVENT, UPDATE_EVENT } from './ActionTypes'; 
+
 export const addEvent = event => {
   return {
-    type: 'ADD_EVENT',
+    type: ADD_EVENT,
     ...event
   }
 }
 
-export const viewEvent = (event, events) => {
+export const viewEvent = (event) => {
   return {
-    type: 'VIEW_EVENT',
-    name: event.name,
-    events: events
+    type: VIEW_EVENT,
+    ...event
   }
 }
 
@@ -30,7 +31,7 @@ export const updateDate = (date) =>{
 export const updateEvent = (event) =>{
   console.log('update event called with event', event)
   return {
-    type: 'UPDATE_EVENT',
+    type: UPDATE_EVENT,
     event: event
   }
 }
